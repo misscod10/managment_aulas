@@ -1,21 +1,22 @@
 ---
 - hosts: all
   vars_prompt:
+    
     - name: usuario
       prompt: Usuario del curso 
       private: no
- 
+  
   tasks:
-    
+
     - name: Create the user
       win_user:
-        name: "{{ username }}"
-        password: "{{username}}"
+        name: "{{ usuario }}"
+        password: "{{ usuario }}"
         groups: Users
         state: present
     
     - name: Remove user from the Power Users group
       win_user:
-        name: "{{ username }}"
+        name: "{{ usuario }}"
         groups: Power Users
         state: absent

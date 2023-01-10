@@ -1,0 +1,13 @@
+---
+- hosts: all
+  vars_prompt:
+    - name: usuario
+      prompt: Usuario del curso 
+      private: no
+  
+  tasks:
+
+    - name: delete users
+      win_user:
+        name: "{{ usuario }}"
+        state: absent
