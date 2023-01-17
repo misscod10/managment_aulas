@@ -2,7 +2,7 @@
 - hosts: all
   vars_prompt:
     - name: usuario
-      prompt: Usuario del curso 
+      prompt: Usuario del curso a borrar 
       private: no
   
   tasks:
