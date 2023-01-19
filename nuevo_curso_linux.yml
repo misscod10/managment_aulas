@@ -12,6 +12,7 @@
       user:
         name: "{{ usuario }}"
         state: present
+        create_home: yes
         groups: users
         shell: /bin/bash
         

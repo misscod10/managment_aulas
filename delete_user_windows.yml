@@ -1,0 +1,21 @@
+---
+- hosts: all
+  vars_prompt:
+    - name: usuario
+      prompt: Nombre del usuario a eliminar
+      private: no
+  tasks:
+    - name: Eliminar el usuario
+      win_user:
+        name: "{{ usuario }}"
+        state: absent
+        remove: yes
+    - name: Eliminar la carpeta del usuario
+      win_file:
+        path: C:\Users\{{ usuario }}
+        state: absent
+        recurse: yes
+    - name: Eliminar registros del usuario
+      win_reg_stat:
+        path: HKU\{{ usuario }}
+        state: absent
