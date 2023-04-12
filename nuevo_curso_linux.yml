@@ -1,0 +1,37 @@
+---
+- hosts: all
+  become: yes
+  vars_prompt:
+    
+    - name: usuario
+      prompt: Usuario del curso 
+      private: no
+  
+  tasks:
+
+    - name: Create the user
+      user:
+        name: "{{ usuario }}"
+        state: present
+        create_home: yes
+        groups: users
+        shell: /bin/bash
+        
+    - name: Remove user from the sudo group
+      user:
+        name: "{{ usuario }}"
+        groups: sudo
+        state: absent
+    
+    - name: Install apt-get
+      apt:
+        update_cache: yes
+        upgrade: dist
+    
+    - name: Install Chrome, 7zip, and Notepad++
+      apt:
+        name:
+          - google-chrome-stable
+          - unzip
+          - geany
+        state: present

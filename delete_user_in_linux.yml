@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: yes
+  vars_prompt:
+    - name: usuario
+      prompt: Nombre del usuario a eliminar
+      private: no
+  tasks:
+    - name: Eliminar el usuario
+      user:
+        name: "{{ usuario }}"
+        state: absent
+    - name: Eliminar la carpeta del usuario
+      file:
+        path: /home/{{ usuario }}
+        state: absent
+        recurse: yes
+    - name: Eliminar registros del usuario
+      lineinfile:
+        path: /etc/passwd
+        state: absent
+        line: "{{ usuario }}:"
