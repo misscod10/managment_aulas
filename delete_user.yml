@@ -6,6 +6,10 @@
       private: no
   
   tasks:
+    - name: Remove a profile
+      win_user_profile:
+        username: "{{ usuario }}"
+        state: absent
 
     - name: delete users
       win_user:
